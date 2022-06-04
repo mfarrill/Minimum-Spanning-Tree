@@ -16,11 +16,9 @@ class Graph():
                         continue
                     u, v, weight = int(row[0]), int(row[1]), float(row[2])
                     self.edges.append([u, v, weight])
-                    # get the order of a graph with only a list of edges
                     self.order = max([self.order, u, v])
         except(FileNotFoundError):
-            print(f"Invaid filename: {filename}")
-            sys.exit()
+            sys.exit(f"Invaid filename: {filename}")
 
     def write_graph(self, filename):
         with open(filename, 'w') as f:
@@ -28,7 +26,7 @@ class Graph():
             for edge in self.edges:
                writer.writerow([edge[0], edge[1], edge[2]])
 
-    def kruskal(self):
+    def Kruskals(self):
         # Sort the edge list by weight 
         sorted_edges = sorted(self.edges, key = lambda x: x[2])
         ds = DisjointSet(self.order)     
@@ -43,10 +41,10 @@ class Graph():
         return mwst
 
 class DisjointSet():
-    def __init__(self, size):
-        # Initialize with size+1 since we start with 1st index
-        self.parents = [i for i in range(size+1)]
-        self.ranks = [0 for _ in range(size+1)]
+    def __init__(self, order):
+        # Initialize with order+1 since we start with 1st index
+        self.parents = [i for i in range(order+1)]
+        self.ranks = [0 for _ in range(order+1)]
 
 
     # Find the root of a tree and minimize height with path compression
@@ -67,14 +65,14 @@ class DisjointSet():
             self.parents[root_v] = root_u
             self.ranks[root_u] += 1
 
-def main():
-    if len(sys.argv) == 3:
+def main(argv):
+    if len(argv) == 3:
         graph = Graph()
-        graph.read_graph(sys.argv[1])
-        mwst = graph.kruskal()
-        mwst.write_graph(sys.argv[2])
+        graph.read_graph(argv[1])
+        mwst = graph.Kruskals()
+        mwst.write_graph(argv[2])
     else:        
-        print(f"Usage: python3 {sys.argv[0]} input output")
+        print(f"Usage: python3 {argv[0]} input output")
         
 if __name__ == '__main__':
-    main()
+    main(sys.argv)
