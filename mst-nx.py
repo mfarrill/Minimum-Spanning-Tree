@@ -16,23 +16,33 @@ def Kruskals(G):
     # Create accepted and rejected edge lists for highlighting 
     acc = []
     rej = []
+    loc = 'left'
+    cel_text = [[1, parents[1]], [2, 2], [3, 3], [4, 4],
+            [5, 5], [6, 6], [7, 7], [8, 8]
+           ]
+    widths = (0.075, 0.075)
+    plt.table(cellText=cel_text, colLabels=['Vertex', 'Root'], loc=loc, colWidths=widths)
     draw_graph(G, pos)
     for edge in sorted_edges:
         fig.text(0.125, 0.9, f'find_root({edge[0]}), find_root({edge[1]}).', style = 'italic',fontsize = 16, color='magenta')
+        plt.table(cellText=cel_text, colLabels=['Vertex', 'Root'], loc=loc, colWidths=widths)
         draw_graph(G, pos, examined=[(edge[0], (edge[1]))], accepted=acc, rejected=rej)
         root_u = ds_find(parents, edge[0])
         root_v = ds_find(parents, edge[1])
         if root_u != root_v:
             fig.text(0.125, 0.9, f'Vertices have different roots.\nAdd edge to tree: union({edge[0]}, {edge[1]}).', style = 'italic',fontsize = 16, color='green')
+            plt.table(cellText=cel_text, colLabels=['Vertex', 'Root'], loc=loc, colWidths=widths)
             ds_union(parents, ranks, root_u, root_v)
             acc.append((edge[0], edge[1]))
             draw_graph(G, pos, accepted=acc, rejected=rej)
         else:
             fig.text(0.125, 0.9, f'Vertices have the same root.\nreject edge({edge[0]}, {edge[1]}).', style = 'italic',fontsize = 16, color='red')
+            plt.table(cellText=cel_text, colLabels=['Vertex', 'Root'], loc=loc, colWidths=widths)
             rej.append((edge[0], edge[1]))
             draw_graph(G, pos, accepted=acc, rejected=rej)
     
     fig.text(0.125, 0.9, 'Completed: Minimum Weight Spanning Tree.',fontsize = 16)
+    plt.table(cellText=cel_text, colLabels=['Vertex', 'Root'], loc=loc, colWidths=widths)
     draw_graph(G, pos, accepted=acc, last_frame=True)
 
 '''Disjoint set functions'''
