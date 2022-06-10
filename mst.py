@@ -29,22 +29,22 @@ class Graph():
     def Kruskals(self):
         # Sort the edge list by weight 
         sorted_edges = sorted(self.edges, key = lambda x: x[2])
-        ds = DisjointSet(self.order)     
         mwst = Graph(self.order)
+        self.ds_init()     
         
         for edge in sorted_edges:
-            root_u = ds.find(edge[0])
-            root_v = ds.find(edge[1])
+            root_u = self.find(edge[0])
+            root_v = self.find(edge[1])
             if root_u != root_v:
-                ds.union(root_u, root_v)
+                self.union(root_u, root_v)
                 mwst.edges.append(edge)
         return mwst
 
-class DisjointSet():
-    def __init__(self, order):
+    '''Disjoint set methods below used in Kruskal's'''
+    def ds_init(self):
         # Initialize with order+1 since we start with 1st index
-        self.parents = [i for i in range(order+1)]
-        self.ranks = [0 for _ in range(order+1)]
+        self.parents = [i for i in range(self.order+1)]
+        self.ranks = [0 for _ in range(self.order+1)]
 
 
     # Find the root of a tree and minimize height with path compression
@@ -72,7 +72,7 @@ def main(argv):
         mwst = graph.Kruskals()
         mwst.write_graph(argv[2])
     else:        
-        print(f"Usage: python3 {argv[0]} input output")
-        
+        print(f"Usage: python3 {sys.argv[0]} input output")
+
 if __name__ == '__main__':
     main(sys.argv)
