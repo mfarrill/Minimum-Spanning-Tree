@@ -76,7 +76,7 @@ class Graph():
         self.fig, self.ax = plt.subplots()
         self.pos = nx.spring_layout(self.G)
 
-        # Instantiate accepted and rejected lists for highlighting
+        # Edge lists for highlighting
         self.accepted = []
         self.rejected = []
 
@@ -84,9 +84,9 @@ class Graph():
         order = self.G.number_of_nodes()
         self.loc = 'bottom'
         self.table_data = [[i for i in range(1, order+1)], [i for i in range(1, order+1)]] 
-        self.cell_colors = [['darkgray' for i in range(1, order+1)],['lightgray' for i in range(1, order+1)]]
+        self.cell_colors = [['lightgray' for i in range(1, order+1)],['white' for i in range(1, order+1)]]
         self.row_labels = ['Vertex', 'Root']
-        self.label_colors = ['darkgray', 'lightgray']
+        self.label_colors = ['lightgray', 'white']
     
     def draw(self, examined=[], last_frame=False):
         self.fig.text(0.4445, 0.03, 'Disjoint Set', fontsize=16)
@@ -115,7 +115,7 @@ class Graph():
         
         nx.draw_networkx_edge_labels(self.G, self.pos, edge_labels, font_size=10, font_color='blue')
         plt.draw()
-        plt.pause(0.8)
+        plt.pause(0.7)
         plt.clf()
 
 def main(argv): 
