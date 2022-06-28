@@ -72,8 +72,7 @@ class Graph():
     '''Visualization methods'''
     def init_figure(self):
         # Setup figure size, plots, and layout
-        plt.rcParams['figure.figsize'] = (12, 8)
-        self.fig, self.ax = plt.subplots()
+        self.fig, self.ax = plt.subplots(figsize=(10, 8))
         self.pos = nx.spring_layout(self.G)
 
         # Edge lists for highlighting
