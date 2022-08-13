@@ -114,7 +114,7 @@ class Graph():
         
         nx.draw_networkx_edge_labels(self.G, self.pos, edge_labels, font_size=10, font_color='blue')
         plt.draw()
-        plt.pause(0.7)
+        plt.pause(0.6)
         plt.clf()
 
 def main(argv): 
