@@ -1,22 +1,21 @@
 # Minimum-Spanning-Tree
 ### Contents
 
-**mst-nx.py**
+mst-nx.py
 
-Minumum Spanning Tree Visualizer.
+*Minumum Spanning Tree Visualizer.*
 
-**mst.py**
+mst.py
 
-Commandline tool to output a minimum spanning tree in CSV format.
+*Commandline tool to output a minimum spanning tree in CSV format.*
 
-**input.csv**
+input.csv
 
-Default input graph.
+*Default input graph.*
 
-**input-med, input-lg1, input-lg2**
+input-med.csv, input-lg1.csv, input-lg2.csv
 
-
-Larger graphs which don't display well in the visuailzer but demonstrate the implementation works in the commandline tool
+*Larger graphs which don't display well in the visuailzer but demonstrate the implementation works in the commandline tool.*
 
 ### Dependencies 
 
@@ -30,6 +29,6 @@ Networkx
 
 ### Usage
 
-*python mst-nxy.py [**input**]*
+*python3 mst-nxy.py [**input**]*
 
-*pythom mst.py* ***input output***
+*python3 mst.py* ***input output***
