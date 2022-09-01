@@ -6,17 +6,15 @@ import matplotlib.pyplot as plt
 class Graph():
 
     def __init__(self, filename):
-            self.G = self.read_graph(filename) 
+            self.read_graph(filename) 
             self.init_disjoint_set()
             self.init_figure()
 
     def read_graph(self, filename):
         try:
-            G = nx.read_weighted_edgelist(filename, nodetype=int, delimiter=',')
+            self.G = nx.read_weighted_edgelist(filename, nodetype=int, delimiter=',')
         except(FileNotFoundError):
             sys.exit(f'File not found: {filename}')
-        else:
-            return G
 
     def kruskals(self):
         sorted_edges = [[u, v, data['weight']] for u, v, data in self.G.edges(data=True)]
