@@ -13,7 +13,7 @@ Commandline tool to output a minimum spanning tree in CSV format.
 
 Default input graph.
 
-**input-med, input-lg1, input-lg2**
+**input-med.csv, input-lg1.csv, input-lg2.csv**
 
 
 Larger graphs which don't display well in the visuailzer but demonstrate the implementation works in the commandline tool.
