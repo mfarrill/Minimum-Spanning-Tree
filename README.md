@@ -29,6 +29,6 @@ Networkx
 
 ### Usage
 
-*python mst-nxy.py [**input**]*
+*python3 mst-nxy.py [**input**]*
 
-*pythom mst.py* ***input output***
+*python3 mst.py* ***input output***
