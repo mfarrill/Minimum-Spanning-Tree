@@ -53,7 +53,7 @@ class Graph():
             self.parents[x] = self.find(self.parents[x])
         return self.parents[x]
 
-    # Union by rank to minimize tree height
+    # Union by rank to further minimize tree height
     def union(self, root_u, root_v):
         if self.ranks[root_u] > self.ranks[root_v]:
             self.parents[root_v] = root_u
