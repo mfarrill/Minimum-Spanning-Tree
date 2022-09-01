@@ -16,7 +16,7 @@ Default input graph.
 **input-med, input-lg1, input-lg2**
 
 
-Larger graphs which don't display well in the visuailzer but demonstrate the implementation works in the commandline tool
+Larger graphs which don't display well in the visuailzer but demonstrate the implementation works in the commandline tool.
 
 ### Dependencies 
 
