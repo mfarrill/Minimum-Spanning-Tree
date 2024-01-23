@@ -15,7 +15,7 @@ input.csv
 
 input-med.csv, input-lg1.csv, input-lg2.csv
 
-*Larger graphs which don't display well in the visuailzer but demonstrate the implementation works in the commandline tool.*
+*Larger graphs which don't display as well in the visuailzer, but demonstrate the implementation scales!*
 
 ### Dependencies 
 
@@ -23,7 +23,7 @@ Matplotlib
 
 *pip install matplotlib*
 
-Networkx
+Networkx 3.x
 
 *pip install networkx*
 
