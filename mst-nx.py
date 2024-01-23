@@ -9,16 +9,22 @@ class Graph():
             self.read_graph(filename) 
             self.init_disjoint_set()
             self.init_figure()
+            self.Large = False
+            self.pause = 0.6
 
     def read_graph(self, filename):
         try:
             self.G = nx.read_weighted_edgelist(filename, nodetype=int, delimiter=',')
+           
         except(FileNotFoundError):
             sys.exit(f'File not found: {filename}')
 
     def kruskals(self):
         sorted_edges = [[u, v, data['weight']] for u, v, data in self.G.edges(data=True)]
         sorted_edges.sort(key = lambda x: x[2])
+        if len(sorted_edges) > 20:
+            self.Large = True
+            self.pause = 0.01
         self.draw()
         for edge in sorted_edges:
             root_u = self.find(edge[0])
@@ -90,6 +96,7 @@ class Graph():
         plt.table(cellText=self.table_data, rowLabels=self.row_labels, rowColours=self.label_colors, loc=self.loc, cellColours=self.cell_colors)
         plt.suptitle("Kruskal's algorithm", fontsize=20)
         edge_labels = nx.get_edge_attributes(self.G, 'weight')
+
         if not last_frame:
             nx.draw_networkx(self.G, self.pos, with_labels=True, font_size=10, font_color='white')
             # Highlight edge differently when examined, accepted, rejected
@@ -99,6 +106,11 @@ class Graph():
                 nx.draw_networkx_edges(self.G, self.pos, edgelist = self.accepted, edge_color = 'green', width = 3.0, alpha = 0.6)
             if self.rejected:
                 nx.draw_networkx_edges(self.G, self.pos, edgelist = self.rejected, edge_color = 'red', width = 3.0, alpha = 0.6)
+            if not self.Large:
+                nx.draw_networkx_edge_labels(self.G, self.pos, edge_labels, font_size=10, font_color='blue')
+            plt.draw()
+            plt.pause(self.pause)
+            plt.clf()
         else:
             # Draw only MST edges and edge labels for the last frame
             nx.draw_networkx_nodes(self.G, self.pos)
@@ -109,11 +121,9 @@ class Graph():
             # draw edges twice for consistant appearance, black edge and highlight
             nx.draw_networkx_edges(self.G, self.pos, edgelist = self.accepted, edge_color= 'black')
             nx.draw_networkx_edges(self.G, self.pos, edgelist = self.accepted, edge_color = 'green', width = 3.0, alpha = 0.7)
-        
-        nx.draw_networkx_edge_labels(self.G, self.pos, edge_labels, font_size=10, font_color='blue')
-        plt.draw()
-        plt.pause(0.6)
-        plt.clf()
+            if not self.Large:
+                nx.draw_networkx_edge_labels(self.G, self.pos, edge_labels, font_size=10, font_color='blue')
+            plt.draw()
 
 def main(argv): 
     default = 'input.csv'
